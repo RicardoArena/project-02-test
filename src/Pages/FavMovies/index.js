@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Toaster, toast } from "react-hot-toast";
 
 export function FavMovies() {
   const navigate = useNavigate();
@@ -11,6 +12,8 @@ export function FavMovies() {
   });
 
   const [movie, setMovie] = useState([]);
+
+  const [selectMovie, setSelectMovie] = useState([]);
 
   useEffect(() => {
     async function fetchMovies() {
@@ -36,16 +39,14 @@ export function FavMovies() {
 
   function handleClick(e) {
     e.preventDefault();
-    setMovie({ ...movie, [e.target.name]: e.target.value });
+    setForm({ ...form, movies: selectMovie });
+    toast.success("Seu filme foi adicionado à coleção com sucesso!");
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      await axios.post(
-        "https://ironrest.herokuapp.com/createCollection/ricardoarena",
-        form
-      );
+      await axios.post("https://ironrest.herokuapp.com/ricardoarena", form);
 
       navigate("/");
     } catch (err) {
@@ -55,6 +56,7 @@ export function FavMovies() {
 
   return (
     <>
+      <Toaster />
       <form onSubmit={handleSubmit}>
         <label htmlFor="owner-input">Nome:</label>
         <input
@@ -76,15 +78,13 @@ export function FavMovies() {
         <h2>Escolha seus filmes favoritos:</h2>
         <label>Filmes:</label>
 
-        <select name="select">
+        <select
+          value={selectMovie}
+          onChange={(e) => setSelectMovie(e.target.value)}
+        >
           {movie.map((currentElement) => {
             return (
-              <option
-                onChange={() => {
-                  console.log(currentElement);
-                }}
-                value={currentElement.id}
-              >
+              <option value={currentElement.original_title}>
                 {currentElement.original_title}
               </option>
             );
