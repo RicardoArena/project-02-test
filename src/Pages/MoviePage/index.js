@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export function MoviePages() {
   const { id } = useParams();
@@ -43,6 +44,9 @@ export function MoviePages() {
       <button onClick={handleDelete} className="btn btn-danger">
         Remove
       </button>
+      <Link to={`/editmovie/${id}`} className="btn btn-primary">
+        Editar
+      </Link>
     </>
   );
 }

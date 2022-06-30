@@ -38,9 +38,11 @@ export function FavMovies() {
   }
 
   function handleClick(e) {
+    console.log(handleClick);
     e.preventDefault();
-    setForm({ ...form, movies: selectMovie });
-    toast.success("Seu filme foi adicionado à coleção com sucesso!");
+
+    setForm({ ...form, movies: [...form.movies, selectMovie] });
+    toast.success("Seu filme foi adicionado à sua coleção.");
   }
 
   async function handleSubmit(e) {
