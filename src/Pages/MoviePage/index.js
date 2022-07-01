@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 export function MoviePages() {
   const { id } = useParams();
   const [moviePage, setMoviePage] = useState({});
+
   const navigate = useNavigate();
 
   async function handleDelete() {

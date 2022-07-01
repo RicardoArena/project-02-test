@@ -12,7 +12,7 @@ export function FavMovies() {
   });
 
   const [movie, setMovie] = useState([]);
-
+  console.log(movie);
   const [selectMovie, setSelectMovie] = useState([]);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ export function FavMovies() {
   }
 
   function handleClick(e) {
-    console.log(handleClick);
+    // console.log(handleClick);
     e.preventDefault();
 
     setForm({ ...form, movies: [...form.movies, selectMovie] });
