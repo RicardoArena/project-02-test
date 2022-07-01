@@ -81,6 +81,14 @@ export function EditMovie() {
     <>
       <Toaster />
       <form onSubmit={handleSubmit}>
+        <label htmlFor="owner-input">Nome:</label>
+        <input
+          id="owner-input"
+          value={form.owner}
+          type="string"
+          name="owner"
+          onChange={handleChange}
+        />
         <label htmlFor="description-input">Descrição:</label>
         <input
           id="description-input"
